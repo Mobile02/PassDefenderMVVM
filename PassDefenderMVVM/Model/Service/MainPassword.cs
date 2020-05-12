@@ -1,4 +1,8 @@
-﻿
+﻿/// <summary>
+/// Шифрация и дешифрация основного пароля (вводимого при старте программы).
+/// Пароль в результате хранится в зашифрованном виде в Properties.Settings.Default.savePassword
+/// при обращении к нему дешифруется в нормальный вид
+/// </summary>
 namespace PassDefenderMVVM.Model.Service
 {
     class MainPassword

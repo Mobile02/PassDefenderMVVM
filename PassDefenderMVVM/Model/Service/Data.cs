@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace PassDefenderMVVM.Model.Service
 {
     class Data
@@ -26,7 +21,7 @@ namespace PassDefenderMVVM.Model.Service
             get { return password; }
             set
             {
-                if (cryptOnLostFocus)
+                if (cryptOnLostFocus) // исключает двойную шифрацию пароля при старте программы
                 {
                     MainPassword cryptoModel = new MainPassword();
                     password = new CryptoService().Encrypt(value, cryptoModel.PassPhrase, cryptoModel.SaltValue, cryptoModel.InitVector);

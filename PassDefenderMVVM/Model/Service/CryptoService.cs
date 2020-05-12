@@ -63,7 +63,7 @@ namespace PassDefenderMVVM.Model.Service
 
             byte[] plainTextBytes = new byte[cipherTextBytes.Length];
 
-            try
+            try  // для корректного запуска, при неправильном вводе пароля
             {
                 int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
                 memoryStream.Close();
