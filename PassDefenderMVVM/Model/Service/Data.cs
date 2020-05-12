@@ -1,19 +1,43 @@
-﻿
+﻿using GalaSoft.MvvmLight;
+
 namespace PassDefenderMVVM.Model.Service
 {
-    class Data
+    class Data : ViewModelBase
     {
+        private string info;
+        private string login;
         private string password;
         private bool cryptOnLostFocus;
-        public string Info { get; set; }
+        public string Info 
+        {
+            get { return info; }
+            set
+            {
+                info = value;
+                RaisePropertyChanged("Info");
+            }
+        }
 
-        public string Login { get; set; }
+        public string Login 
+        {
+            get { return login; }
+            set
+            {
+                login = value;
+                RaisePropertyChanged("Login");
+            }
+        }
 
         public Data(string info, string login, string password)
         {
             Info = info;
             Login = login;
             Password = password;
+        }
+
+        public Data()
+        {
+
         }
 
         public string Password
@@ -31,6 +55,7 @@ namespace PassDefenderMVVM.Model.Service
                     password = value;
                     cryptOnLostFocus = true;
                 }
+                RaisePropertyChanged("Password");
             }
         }
     }

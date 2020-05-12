@@ -28,7 +28,6 @@ namespace PassDefenderMVVM.ViewModel
         private ICommand commandDeleteRow;
         private ICommand commandAddRow;
         private ICommand commandSave;
-        private ICommand commandEdit;
         private ICommand commandLoaded;
 
         public MainWindowViewModel()
@@ -40,6 +39,11 @@ namespace PassDefenderMVVM.ViewModel
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
+        }
+
+        private void SelectedData_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            IsEditing = true;
         }
 
         public bool IsEditing
@@ -68,6 +72,8 @@ namespace PassDefenderMVVM.ViewModel
             set
             {
                 selectedData = value;
+                SelectedData.PropertyChanged -= SelectedData_PropertyChanged;
+                SelectedData.PropertyChanged += SelectedData_PropertyChanged;
                 RaisePropertyChanged("SelectedData");
             }
         }
@@ -174,18 +180,6 @@ namespace PassDefenderMVVM.ViewModel
             }
         }
 
-        public ICommand CommandEdit
-        {
-            get
-            {
-                if (commandEdit == null)
-                {
-                    return commandEdit = new RelayCommand(execute: IsEdit);
-                }
-                return commandEdit;
-            }
-        }
-
         public ICommand CommandLoaded
         {
             get
@@ -205,11 +199,6 @@ namespace PassDefenderMVVM.ViewModel
             dataModel = new DataModel();
             dataModel.LoadData(filePath);
             DataCollections = dataModel.DataCollections;
-        }
-
-        private void IsEdit()
-        {
-            IsEditing = true;
         }
 
         private void CopyLogin()
@@ -268,7 +257,6 @@ namespace PassDefenderMVVM.ViewModel
             LabelInfo = "Буфер обмена будет очищен через " + $"{(1500 - ProgressBarValue) / 100}";
             if ((ProgressBarValue += 1) >= 1500)
             {
-
                 dispatcherTimer.Stop();
                 ProgressBarValue = 0;
                 LabelInfo = "";

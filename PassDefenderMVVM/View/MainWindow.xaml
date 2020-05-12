@@ -8,11 +8,11 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         
-    Title="Хранитель паролей" Height="300" Width="800" MinWidth="650" MinHeight="200" WindowStartupLocation="Manual" Closing="MainWindow1_Closing">
+    Title="Хранитель паролей" Height="300" Width="800" MinWidth="650" MinHeight="200" WindowStartupLocation="Manual">
     <Window.DataContext>
         <user:MainWindowViewModel></user:MainWindowViewModel>
     </Window.DataContext>
-    
+
     <Window.Resources>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="FontWeight" Value="Bold"/>
@@ -26,15 +26,12 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <DataGrid x:Name="dataGrid" Margin="1,1,1,30" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" 
                   CanUserReorderColumns="False" CanUserSortColumns="False" HorizontalScrollBarVisibility="Disabled" GridLinesVisibility="None" SelectionMode="Single"
                   ItemsSource="{Binding DataCollections}" SelectedItem="{Binding SelectedData, Mode=TwoWay}" BorderBrush="White" FocusVisualStyle="{x:Null}">
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="KeyDown">
-                    <i:InvokeCommandAction Command="{Binding Path=DataContext.CommandEdit, RelativeSource={RelativeSource AncestorType=Window}}"></i:InvokeCommandAction>
-                </i:EventTrigger>
                 <i:EventTrigger EventName="Loaded">
                     <i:InvokeCommandAction Command="{Binding CommandLoaded}"></i:InvokeCommandAction>
                 </i:EventTrigger>
