@@ -41,11 +41,6 @@ namespace PassDefenderMVVM.ViewModel
             dispatcherTimer.Tick += DispatcherTimer_Tick;
         }
 
-        private void SelectedData_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            IsEditing = true;
-        }
-
         public bool IsEditing
         {
             get { return isEditing; }
@@ -107,7 +102,7 @@ namespace PassDefenderMVVM.ViewModel
                 RaisePropertyChanged("LabelInfo");
             }
         }
-
+        #region Commands
         public ICommand CommandCopyLogin
         {
             get
@@ -191,7 +186,7 @@ namespace PassDefenderMVVM.ViewModel
                 return commandLoaded;
             }
         }
-
+        #endregion
         private void Loaded()
         {
             new PasswordWindowViewModel().Check();
@@ -264,6 +259,11 @@ namespace PassDefenderMVVM.ViewModel
                 Copying = false;
                 Clipboard.Clear();
             }
+        }
+
+        private void SelectedData_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            IsEditing = true;
         }
     }
 }

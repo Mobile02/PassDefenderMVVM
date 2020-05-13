@@ -35,11 +35,6 @@ namespace PassDefenderMVVM.Model.Service
             Password = password;
         }
 
-        public Data()
-        {
-
-        }
-
         public string Password
         {
             get { return password; }
